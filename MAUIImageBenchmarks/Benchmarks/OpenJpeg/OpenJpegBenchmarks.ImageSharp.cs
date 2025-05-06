@@ -11,7 +11,6 @@ public partial class OpenJpegBenchmarks
         {
             await using (var stream = await FileSystem.OpenAppPackageFileAsync(TestFile).ConfigureAwait(false))
             {
-                // We complete the LoadAsync
                 using (var image = await SixLabors.ImageSharp.Image.LoadAsync(stream).ConfigureAwait(false))
                 {
                     Console.WriteLine($"{image.Width}x{image.Height}");

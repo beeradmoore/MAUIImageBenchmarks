@@ -21,10 +21,6 @@ public partial class MainPageModel : ObservableObject
     [RelayCommand]
     async Task RunBenchmarks()
     {
-        var test = new Benchmarks.OpenJpeg.OpenJpegBenchmarks();
-        await test.ImageSharp();
-
-        return;
         var artifactsPath = Path.Combine(Path.GetTempPath(), "BenchmarkBindings", "Artifacts");
         if (Directory.Exists(artifactsPath) == false)
         {
