@@ -8,7 +8,6 @@ using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Order;
 using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
-using MAUIImageBenchmarks.Benchmarks.ImageSharp;
 
 namespace MAUIImageBenchmarks;
 

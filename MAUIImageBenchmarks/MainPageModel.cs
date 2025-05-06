@@ -12,7 +12,6 @@ using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MAUIImageBenchmarks.Benchmarks.ImageSharp;
 
 namespace MAUIImageBenchmarks;
 
@@ -21,19 +20,28 @@ public partial class MainPageModel : ObservableObject
     [RelayCommand]
     async Task RunBenchmarks()
     {
+        var logger = new AccumulationLogger();
+
         var artifactsPath = Path.Combine(Path.GetTempPath(), "BenchmarkBindings", "Artifacts");
         if (Directory.Exists(artifactsPath) == false)
         {
             Directory.CreateDirectory(artifactsPath);
         }
-		
+        
+        /*		
         var config = ManualConfig.CreateMinimumViable()
             .AddJob(Job.Default.WithToolchain(new InProcessEmitToolchain(TimeSpan.FromMinutes(10), logOutput: true)))
             .AddDiagnoser(MemoryDiagnoser.Default)
             .WithArtifactsPath(artifactsPath)
             .WithOrderer(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest, MethodOrderPolicy.Alphabetical));
         config.UnionRule = ConfigUnionRule.AlwaysUseGlobal; // Overriding the default
+        */
 
+        var config = ManualConfig.CreateEmpty()
+            .AddColumnProvider(DefaultColumnProviders.Instance)
+            .AddLogger(ConsoleLogger.Default)
+            .WithArtifactsPath(artifactsPath);
+        
         var benchmarks = new[]
         {
             //typeof(Test),
@@ -49,7 +57,7 @@ public partial class MainPageModel : ObservableObject
                 return BenchmarkRunner.Run(benchmarks, config.WithOptions(ConfigOptions.DisableLogFile));
             });
             
-            /*
+            
             foreach (var summary in summaries)
             {
                 MarkdownExporter.Console.ExportToLog(summary, logger);
@@ -59,10 +67,10 @@ public partial class MainPageModel : ObservableObject
                         .Distinct()
                         .ToList());
             }
-            */
         }
         catch (Exception err)
         {
+            Console.WriteLine($"ERROR: {err.Message}");
             Debugger.Break();
         }
     }
