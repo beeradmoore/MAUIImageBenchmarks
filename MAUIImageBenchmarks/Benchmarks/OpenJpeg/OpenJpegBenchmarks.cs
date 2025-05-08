@@ -117,6 +117,90 @@ public class OpenJpegBenchmarks : IBenchmarkInfo
             }
         }
     }
+#elif __MACCATALYST__ 
+    [Benchmark(Baseline = true)]
+    public async Task Native_MacCatalyst_FromResource()
+    {
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
+        {
+            using (var data = Foundation.NSData.FromStream(stream))
+            {
+                if (data is null)
+                {
+                    throw new Exception("Failed to NSData.FromStream.");
+                }
+                using (var image = UIKit.UIImage.LoadFromData(data))
+                {
+                    if (image is null)
+                    {
+                        throw new Exception("Failed to UIImage.LoadFromData.");
+                    }
+                    if (image.Size.Width != _expectedImageWidth || image.Size.Height != _expectedImageHeight)
+                    {
+                        throw new Exception("Image width and height are different, image not loaded correctly.");
+                    }
+                }
+            }
+        }
+    }
+    
+    [Benchmark]
+    public void Native_MacCatalyst_FromFile()
+    {
+        using (var image = UIKit.UIImage.FromFile(_tempTestFile))
+        {
+            if (image is null)
+            {
+                throw new Exception("Failed to UIImage.LoadFromData.");
+            }
+            if (image.Size.Width != _expectedImageWidth || image.Size.Height != _expectedImageHeight)
+            {
+                throw new Exception("Image width and height are different, image not loaded correctly.");
+            }
+        }
+    }
+#elif __IOS__ 
+    [Benchmark(Baseline = true)]
+    public async Task Native_iOS_FromResource()
+    {
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
+        {
+            using (var data = Foundation.NSData.FromStream(stream))
+            {
+                if (data is null)
+                {
+                    throw new Exception("Failed to NSData.FromStream.");
+                }
+                using (var image = UIKit.UIImage.LoadFromData(data))
+                {
+                    if (image is null)
+                    {
+                        throw new Exception("Failed to UIImage.LoadFromData.");
+                    }
+                    if (image.Size.Width != _expectedImageWidth || image.Size.Height != _expectedImageHeight)
+                    {
+                        throw new Exception("Image width and height are different, image not loaded correctly.");
+                    }
+                }
+            }
+        }
+    }
+    
+    [Benchmark]
+    public void Native_iOS_FromFile()
+    {
+        using (var image = UIKit.UIImage.FromFile(_tempTestFile))
+        {
+            if (image is null)
+            {
+                throw new Exception("Failed to UIImage.LoadFromData.");
+            }
+            if (image.Size.Width != _expectedImageWidth || image.Size.Height != _expectedImageHeight)
+            {
+                throw new Exception("Image width and height are different, image not loaded correctly.");
+            }
+        }
+    }
 #endif
     
 }
