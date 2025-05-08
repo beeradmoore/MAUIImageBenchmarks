@@ -87,18 +87,18 @@ public partial class RunTestPageModel : ObservableObject
 
             //.WithOrderer(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest, MethodOrderPolicy.Alphabetical));
 
-         
             */
 
             await Task.Run(() =>
             {
 #if RELEASE
-                var config = ManualConfig.CreateMinimumViable();
+                var config = ManualConfig.CreateMinimumViable()
+                    .WithArtifactsPath(artifactsPath);
 #else
-                var config = new DebugInProcessConfig();
-#endif
+                var config = new DebugInProcessConfig()
+                    .WithArtifactsPath(artifactsPath);
+#endif          
                 config.AddLogger(logger);
-                config.WithArtifactsPath(artifactsPath);
 
                 var summaries = BenchmarkRunner.Run(BenchmarkMenuItem.Benchmarks, config);
                 foreach (var summary in summaries)
