@@ -7,19 +7,12 @@ public partial class OpenJpegBenchmarks
     [Benchmark]
     public async Task ImageSharp()
     {
-        try
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
         {
-            await using (var stream = await FileSystem.OpenAppPackageFileAsync(TestFile).ConfigureAwait(false))
+            using (var image = await SixLabors.ImageSharp.Image.LoadAsync(stream).ConfigureAwait(false))
             {
-                using (var image = await SixLabors.ImageSharp.Image.LoadAsync(stream).ConfigureAwait(false))
-                {
-                    Console.WriteLine($"{image.Width}x{image.Height}");
-                }
+                Console.WriteLine($"{image.Width}x{image.Height}");
             }
-        }
-        catch (Exception err)
-        {
-            Console.WriteLine(err.Message);
         }
     }
 }

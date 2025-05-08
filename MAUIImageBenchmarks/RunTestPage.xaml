@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUIImageBenchmarks"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MAUIImageBenchmarks.RunTestPage"
+             x:DataType="local:RunTestPageModel"
+             Title="{Binding BenchmarkMenuItem.Name}">
+    
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
+        <toolkit:IntToBoolConverter x:Key="IntToBoolConverter" />
+    </ContentPage.Resources>
+    
+    
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Command="{Binding ShareResultsCommand}" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        
+        <Label IsVisible="{Binding Countdown, Converter={StaticResource IntToBoolConverter}}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Stating in: " FontAttributes="Bold" />
+                    <Span Text="{Binding Countdown}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        
+        <Editor Text="{Binding Results}" FontFamily="JetBrainsMono" IsReadOnly="True" IsVisible="{Binding Results, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}" />
+        
+        <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" HorizontalOptions="Center" VerticalOptions="Center" />
+        
+    </Grid>
+</ContentPage>
