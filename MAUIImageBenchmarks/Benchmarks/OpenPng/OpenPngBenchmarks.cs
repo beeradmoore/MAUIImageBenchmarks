@@ -1,21 +1,21 @@
 using BenchmarkDotNet.Attributes;
 
-namespace MAUIImageBenchmarks.Benchmarks.OpenJpeg;
+namespace MAUIImageBenchmarks.Benchmarks.OpenPng;
 
 [MemoryDiagnoser(false)]
-public class OpenJpegBenchmarks : IBenchmarkInfo
+public class OpenPngBenchmarks : IBenchmarkInfo
 {
-    public static string Name { get; } = "Open jpeg";
+    public static string Name { get; } = "Open png";
 
-    readonly string _tempTestFile = Helpers.GetTempJpg();
+    readonly string _tempTestFile = Helpers.GetTempPng();
     
-    readonly int _expectedImageWidth = 1999;
-    readonly int _expectedImageHeight = 2998;
+    readonly int _expectedImageWidth = 582;
+    readonly int _expectedImageHeight = 453;
     
     [GlobalSetup]
     public async Task SetupAsync()
     {
-        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.PngTestImage).ConfigureAwait(false))
         {
             await using (var fileStream = File.Create(_tempTestFile))
             {
@@ -27,7 +27,7 @@ public class OpenJpegBenchmarks : IBenchmarkInfo
     [Benchmark]
     public async Task ImageSharp_FromResource()
     {
-        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.PngTestImage).ConfigureAwait(false))
         {
             using (var image = await SixLabors.ImageSharp.Image.LoadAsync(stream).ConfigureAwait(false))
             {
@@ -54,7 +54,7 @@ public class OpenJpegBenchmarks : IBenchmarkInfo
     [Benchmark]
     public async Task SkiaSharp_FromResource()
     {
-        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.PngTestImage).ConfigureAwait(false))
         {
             using (var image = SkiaSharp.SKImage.FromEncodedData(stream))
             {
@@ -86,7 +86,7 @@ public class OpenJpegBenchmarks : IBenchmarkInfo
     [Benchmark(Baseline = true)]
     public async Task Native_Android_FromResource()
     {
-        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.JpgTestImage).ConfigureAwait(false))
+        await using (var stream = await FileSystem.OpenAppPackageFileAsync(Helpers.PngTestImage).ConfigureAwait(false))
         {
             using (var image = await Android.Graphics.BitmapFactory.DecodeStreamAsync(stream).ConfigureAwait(false))
             {

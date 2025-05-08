@@ -17,7 +17,7 @@ public partial class ListTestsPageModel : ObservableObject
         _weakPage = new WeakReference<ListTestsPage>(page);
         
         BenchmarksList.Add(new BenchmarkMenuItem(Benchmarks.OpenJpeg.OpenJpegBenchmarks.Name, typeof(Benchmarks.OpenJpeg.OpenJpegBenchmarks)));
-        BenchmarksList.Add(new BenchmarkMenuItem(Benchmarks.OpenJpegFromFile.OpenJpegFromFileBenchmarks.Name, typeof(Benchmarks.OpenJpegFromFile.OpenJpegFromFileBenchmarks)));
+        BenchmarksList.Add(new BenchmarkMenuItem(Benchmarks.OpenPng.OpenPngBenchmarks.Name, typeof(Benchmarks.OpenPng.OpenPngBenchmarks)));
 
         // Add all benchmarks to the list
         var allBenchmarks = new List<Type>();
