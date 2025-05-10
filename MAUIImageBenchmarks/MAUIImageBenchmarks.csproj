@@ -87,4 +87,10 @@
         <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     </PropertyGroup>
 
+    <!--
+    <ItemGroup>
+        <MonoAOTCompilerDefaultProcessArguments Include="-O=-intrins" />
+    </ItemGroup>
+    -->
+    
 </Project>
