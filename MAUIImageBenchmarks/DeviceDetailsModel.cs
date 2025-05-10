@@ -11,7 +11,8 @@ public partial class DeviceDetailsModel : ObservableObject
 {
     WeakReference<DeviceDetails> _weakPage;
     
-    public string Details { get; private set; } = string.Empty;
+    [ObservableProperty]
+    public partial string Details { get; set; } = string.Empty;
 
     public DeviceDetailsModel(DeviceDetails page)
     {
