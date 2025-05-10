@@ -6,5 +6,10 @@
              x:Class="MAUIImageBenchmarks.DeviceDetails"
              x:DataType="local:DeviceDetailsModel"
              Title="Device Details">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Command="{Binding ShareDetailsCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <Editor Text="{Binding Details}" IsReadOnly="True" Margin="16" />
 </ContentPage>

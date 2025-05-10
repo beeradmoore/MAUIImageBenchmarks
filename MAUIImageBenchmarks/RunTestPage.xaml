@@ -13,8 +13,6 @@
         <toolkit:IntToBoolConverter x:Key="IntToBoolConverter" />
     </ContentPage.Resources>
     
-    
-    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Share" Command="{Binding ShareResultsCommand}" />
     </ContentPage.ToolbarItems>
