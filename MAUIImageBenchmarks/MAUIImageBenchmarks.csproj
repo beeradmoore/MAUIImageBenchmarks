@@ -92,5 +92,9 @@
         <MonoAOTCompilerDefaultProcessArguments Include="-O=-intrins" />
     </ItemGroup>
     -->
+
+    <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' AND '$(Configuration)' == 'Release'">
+        <EnableAssemblyILStripping>false</EnableAssemblyILStripping>
+    </PropertyGroup>
     
 </Project>
