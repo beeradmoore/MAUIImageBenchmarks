@@ -54,7 +54,7 @@ public partial class DeviceDetailsModel : ObservableObject
         stringBuilder.AppendLine($"AdvSimd.IsSupported: {System.Runtime.Intrinsics.Arm.AdvSimd.IsSupported}");
         stringBuilder.AppendLine($"AdvSimd.Arm64.IsSupported: {System.Runtime.Intrinsics.Arm.AdvSimd.Arm64.IsSupported}");
         stringBuilder.AppendLine($"Aes.IsSupported: {System.Runtime.Intrinsics.Arm.Aes.IsSupported}");
-        stringBuilder.AppendLine($"Ae.Arm64s.IsSupported: {System.Runtime.Intrinsics.Arm.Aes.Arm64.IsSupported}");
+        stringBuilder.AppendLine($"Aes.Arm64.IsSupported: {System.Runtime.Intrinsics.Arm.Aes.Arm64.IsSupported}");
         stringBuilder.AppendLine($"ArmBase.IsSupported: {System.Runtime.Intrinsics.Arm.ArmBase.IsSupported}");
         stringBuilder.AppendLine($"ArmBase.Arm64.IsSupported: {System.Runtime.Intrinsics.Arm.ArmBase.Arm64.IsSupported}");
         stringBuilder.AppendLine($"Crc32.IsSupported: {System.Runtime.Intrinsics.Arm.Crc32.IsSupported}");
