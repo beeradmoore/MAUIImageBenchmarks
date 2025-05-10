@@ -6,6 +6,11 @@
              x:Class="MAUIImageBenchmarks.ListTestsPage"
              x:DataType="local:ListTestsPageModel"
              Title="Benchmarks">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Device details" Command="{Binding ViewDeviceDetailsCommand}" />
+    </ContentPage.ToolbarItems>
+        
     <CollectionView ItemsSource="{Binding BenchmarksList}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="local:BenchmarkMenuItem">
@@ -16,5 +21,5 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
-    
+
 </ContentPage>

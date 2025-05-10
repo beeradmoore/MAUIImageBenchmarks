@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUIImageBenchmarks"
+             x:Class="MAUIImageBenchmarks.DeviceDetails"
+             x:DataType="local:DeviceDetailsModel"
+             Title="Device Details">
+    <Editor Text="{Binding Details}" IsReadOnly="True" Margin="16" />
+</ContentPage>

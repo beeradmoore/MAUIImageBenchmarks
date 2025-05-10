@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MAUIImageBenchmarks;
 
@@ -52,6 +53,15 @@ public partial class ListTestsPageModel : ObservableObject
             {
                 page.Navigation.PushAsync(new RunTestPage(selectedItem));
             }
+        }
+    }
+
+    [RelayCommand]
+    async Task ViewDeviceDetailsAsync()
+    {
+        if (_weakPage.TryGetTarget(out var page))
+        {
+            await page.Navigation.PushAsync(new DeviceDetails());
         }
     }
 }
