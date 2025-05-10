@@ -18,7 +18,6 @@ public partial class DeviceDetailsModel : ObservableObject
     {
         _weakPage = new WeakReference<DeviceDetails>(page);
         
-        //AdvSimd.Arm64.IsSupported, and System.Numerics.Vector.IsHardwareAccelerated.
         var stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("DeviceInfo");
         stringBuilder.AppendLine($"DeviceType: {DeviceInfo.DeviceType}");
